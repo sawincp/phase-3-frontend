@@ -5,10 +5,10 @@ const NavBar = () => {
 
   const linkStyles = {
     display: "inline",
-    justifyContent: "center", // This centers items horizontally
-    alignItems: "center", // This centers items vertically
+    justifyContent: "center", 
+    alignItems: "center", 
     width: "50px",
-    height: "50px", // Added height to better visualize the effects of the justifyContent and alignItems properties 
+    height: "50px",
     padding: "20px",
     margin: "0 6px 6px",
     background: "blue",
