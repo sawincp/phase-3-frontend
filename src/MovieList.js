@@ -19,7 +19,7 @@ const MovieList = ({movies}) => {
      <h1> MovieList
       <hr></hr>
      </h1>
-     <p></p>
+     <ul>{moviesList}</ul>
       
     </div>
 
