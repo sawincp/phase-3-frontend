@@ -3,6 +3,10 @@ import Movie from './Movie'
 
 const MovieList = ({movies}) => {
 
+  const movieListStyle ={
+    padding: "20px"
+  }
+
   const moviesList = movies.map((movie)=>{
     return(
       <Movie
@@ -16,7 +20,7 @@ const MovieList = ({movies}) => {
 
   return (
     <div className='Movies'>
-     <h1> Movie List
+     <h1 style={movieListStyle}> Movie List
       <hr></hr>
      </h1>
      <ul>{moviesList}</ul>
