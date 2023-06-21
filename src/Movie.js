@@ -8,7 +8,7 @@ const Movie = ({movie}) => {
 
   return (
     <Container>
-      <Row>
+      <Row> 
         <Col><p>{title}</p></Col>
         <Col>{genre}</Col>
       </Row>

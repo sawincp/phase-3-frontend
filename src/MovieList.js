@@ -16,7 +16,7 @@ const MovieList = ({movies}) => {
 
   return (
     <div className='Movies'>
-     <h1> MovieList
+     <h1> Movie List
       <hr></hr>
      </h1>
      <ul>{moviesList}</ul>
