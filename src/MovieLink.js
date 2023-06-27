@@ -12,7 +12,7 @@ const MovieLink = ({ movie }) => {
             <Col><p>{movie.title}</p></Col>
             <Col><p>{movie.genre}</p></Col>
             <Col>
-                <Link to={`http://localhost:9292/movies/${movie.id}`} >
+                <Link to={`/movies/${movie.id}`} >
                     <p>Reviews</p>
                 </Link>
             </Col>
