@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 const MovieList = () => {
 
   const [movies, setMovies]= useState([])
+  const [movieFormFlag, setMovieFormFlag]= useState(false)
 
   useEffect(()=>{
     fetch("http://localhost:9292/movies")
@@ -35,40 +36,13 @@ const MovieList = () => {
         <Col><h3>REVIEWS</h3></Col>
       </Row>
       <Row>
-        <p>{listOfMovies}</p>
+        {listOfMovies}
       </Row>
 
 
 
     </Container>
 
-    // <div >
-    //   <ul> 
-    //     {listOfMovies}
-    //   </ul>
-    // </div>
-
-    // <Container style={movieListStyle}>
-    //   <Row>
-    //     <Col><h2>Title</h2>
-    //     {movies.map((movie)=>(
-    //       <Movie
-    //       key={movie.id}
-    //       title={movie.title}
-    //      />
-    //      ))}
-    //     </Col>
-    //     <Col><h2>Genre</h2>
-    //     {movies.map((movie)=>(
-    //       <Movie
-    //       key={movie.id}
-    //       genre={movie.genre}
-    //       />
-    //     ))}
-    //     </Col>
-    //   </Row>
-    // </Container>
-    
   )
 
   }
