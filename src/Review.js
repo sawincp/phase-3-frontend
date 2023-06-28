@@ -1,8 +1,19 @@
 import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
-const Review = () => {
+const Review = ({ review }) => {
+
+
+
   return (
-    <div>Review</div>
+    <Container> {review.title}
+    <Row> 
+        <Col><p>{review.score}</p></Col>
+        <Col><p>{review.comment}</p></Col>
+    </Row>
+
+    
+</Container>
   )
 }
 
