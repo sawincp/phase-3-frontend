@@ -7,15 +7,15 @@ import NewReview from './NewReview'
 
 const Movie = () => {
   
+  const params = useParams()
+  
   const [movie, setMovie]= useState({
     reviews: []
   })
   
-  const params = useParams()
+  const [editReview, setEditReview] = useState(null)
   
-  const movieListStyle ={
-    padding: "20px"
-  }
+  const [isEditFromOpen, setIsEditFormOpen]= useState(false)
 
   useEffect (()=>{
     fetch(`http://localhost:9292/movies/${params.id}`)
@@ -46,6 +46,39 @@ const Movie = () => {
       });
   };
 
+  const handleEditReview = (review) =>{
+    setEditReview(review)
+    setIsEditFormOpen(true)
+  }
+
+  const handleCancelEdit = () =>{
+    setEditReview(null)
+    setIsEditFormOpen(false)
+  }
+
+  const handleUpdateReview = (updatedReview) => {
+    fetch(`http://localhost:9292/reviews/${updatedReview.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        score: updatedReview.score,
+        comment: updatedReview.comment,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMovie((prevMovie) => {
+          const updatedReviews = prevMovie.reviews.map((review) =>
+            review.id === data.id ? data : review
+          );
+          return { ...prevMovie, reviews: updatedReviews };
+        });
+        setIsEditFormOpen(false);
+      });
+  };
+
   const handleDeleteReview = (reviewId) => {
     setMovie((prevMovie) => ({
       ...prevMovie,
@@ -58,8 +91,12 @@ const Movie = () => {
       key = {review.id}
       review = {review}
       onDeleteReview = {handleDeleteReview}
+      onEditReview={handleEditReview}
     /> );
 
+    const movieListStyle ={
+      padding: "20px"
+    }
 
   return (
     <Container style={movieListStyle}>
@@ -71,6 +108,12 @@ const Movie = () => {
       </Row>
       <Row style={{textAlign: "center"}}>
         {reviews}
+        {isEditFromOpen && (
+          <EditReviewForm 
+            review = {editReview}
+            onUpdatedReview= {handleUpdateReview}
+            onCancelEdit= {handleCancelEdit}/>
+        )}
         <NewReview onAddReview={addReview} />
       </Row>
     </Container>

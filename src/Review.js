@@ -21,12 +21,8 @@ const Review = ({ review, onDeleteReview }) => {
             🗑
             </span>
           </button>
-        
         </Col>
-
     </Row>
-
-    
 </Container>
   )
 }

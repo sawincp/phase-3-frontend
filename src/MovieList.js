@@ -2,12 +2,9 @@ import React, { useState, useEffect } from 'react'
 import MovieLink from './MovieLink'
 import { Container, Row, Col } from 'react-bootstrap'
 
-
-
 const MovieList = () => {
 
   const [movies, setMovies]= useState([])
-  const [movieFormFlag, setMovieFormFlag]= useState(false)
 
   useEffect(()=>{
     fetch("http://localhost:9292/movies")
@@ -21,7 +18,6 @@ const MovieList = () => {
     <MovieLink
     key={movie.id}
     movie={movie}/>)
-
 
   const movieListStyle ={
     padding: "20px"
@@ -38,13 +34,8 @@ const MovieList = () => {
       <Row>
         {listOfMovies}
       </Row>
-
-
-
     </Container>
-
   )
-
-  }
+}
 
 export default MovieList
