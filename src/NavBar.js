@@ -20,8 +20,8 @@ const NavBar = () => {
   
   return (
     <div>
-        <NavLink to= "/" activeClassName= "active" style={ linkStyles }> Home </NavLink>
-        <NavLink to= "/movies" activeClassName= "active" style={ linkStyles }> Movie List </NavLink>
+        <NavLink to= "/" style={ linkStyles }> Home </NavLink>
+        <NavLink to= "/movies" style={ linkStyles }> Movie List </NavLink>
     </div>
   )
 }
