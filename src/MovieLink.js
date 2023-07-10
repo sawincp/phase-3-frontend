@@ -5,7 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 const MovieLink = ({ movie }) => {
 
-
   return (
     <Container>
         <Row> 

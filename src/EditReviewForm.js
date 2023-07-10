@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const EditReviewForm = ({ review, onUpdateReview }) => {
 
@@ -23,19 +24,27 @@ const EditReviewForm = ({ review, onUpdateReview }) => {
     }
     
     return (
-         <form onSubmit={handleSubmit}>
-            <input
-              type="number"
-              value={score}
-              onChange={(e) => setScore(e.target.value)}
-            />
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <input type='submit' value='Save' />
+      <Container>
+        <form onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <input
+                type="number"
+                value={score}
+                onChange={(e) => setScore(e.target.value)}
+              />
+            </Col>
+            <Col>
+              <textarea
+              name="new-comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              />
+            </Col>
+            <Col><button type='submit'>Save</button></Col>
+          </Row>
         </form>
+      </Container>
     )
 }
 
