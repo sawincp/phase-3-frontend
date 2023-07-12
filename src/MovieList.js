@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import MovieLink from './MovieLink'
 import { Container, Row, Col } from 'react-bootstrap'
 
-const MovieList = () => {
-
-  const [movies, setMovies]= useState([])
-
-  useEffect(()=>{
-    fetch("http://localhost:9292/movies")
-    .then((r)=> r.json())
-    .then((movies)=> setMovies(movies))
-  },[])
+const MovieList = ({movies}) => {
 
   if(!movies) return ("Loading...")
 

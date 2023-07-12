@@ -1,81 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap';
 
-import Review from './Review'
-import NewReview from './NewReview'
+import Review from './Review';
+import NewReview from './NewReview';
 
-const Reviews = () => {
+const Reviews = ({ movies, onAddReview, onUpdateReview, onDeleteReview }) => {
   
-  const params = useParams()
-  
-  const [movie, setMovie]= useState({
-    reviews: []
-  })
+  const params = useParams();
+  const movieId = Number(params.id);
+  const movie = movies.find((movie) => movie.id === movieId);
 
-  useEffect (()=>{
-    fetch(`http://localhost:9292/movies/${params.id}`)
-    .then(res => res.json())
-    .then(data => {
-      setMovie(data)
-    })
-  }, [])
-
-  const addReview = (newReview) =>{
-    setMovie((prevMovie) => ({
-      ...prevMovie,
-      reviews: [...prevMovie.reviews, newReview],
-    }));
-  }
-
-  const handleUpdatedReview = (updatedReview) =>{
-    setMovie((prevMovie) => {
-      const updatedReviews = prevMovie.reviews.map((review) => {
-        if (review.id === updatedReview.id) {
-          return updatedReview;
-        } else {
-          return review;
-        }
-      });
-      return { ...prevMovie, reviews: updatedReviews };
-    });
-
-  }
-
-  const handleDeleteReview = (reviewId) => {
-    setMovie((prevMovie) => ({
-      ...prevMovie,
-      reviews: prevMovie.reviews.filter((review) => review.id !== reviewId),
-    }));
+  const addReview = (newReview) => {
+    onAddReview(movieId, newReview);
   };
 
-  const reviews = movie.reviews.map(review => 
-    <Review 
-      key = {review.id}
-      review = {review}
-      onDeleteReview = {handleDeleteReview}
-      onUpdateReview ={handleUpdatedReview}
-  
-    /> );
+  const handleUpdatedReview = (updatedReview) => {
+    onUpdateReview(movieId, updatedReview);
+  };
 
-    const movieListStyle ={
-      padding: "20px"
-    }
+  const handleDeleteReview = (reviewId) => {
+    onDeleteReview(movieId, reviewId);
+  };
+
+  const reviews = movie ? (
+    movie.reviews.map((review) => (
+      <Review
+        key={review.id}
+        review={review}
+        onDeleteReview={handleDeleteReview}
+        onUpdateReview={handleUpdatedReview}
+      />
+    ))
+  ) : (
+    <p>No reviews found for this movie.</p>
+  );
+
+  const movieListStyle = {
+    padding: '20px',
+  };
 
   return (
     <Container style={movieListStyle}>
-      <Row style={{textAlign: "center"}}>
-        <h1>{movie.title} REVIEWS</h1>
-        <hr></hr>
-        <Col><h3>SCORE</h3></Col>
-        <Col><h3>REVIEWS</h3></Col>
+      <Row style={{ textAlign: 'center' }}>
+        <h1>{movie ? `${movie.title} REVIEWS` : 'Movie Reviews'}</h1>
+        <hr />
+        <Col>
+          <h3>SCORE</h3>
+        </Col>
+        <Col>
+          <h3>REVIEWS</h3>
+        </Col>
       </Row>
-      <Row style={{textAlign: "center"}}>
+      <Row style={{ textAlign: 'center' }}>
         {reviews}
         <NewReview onAddReview={addReview} />
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default Reviews
+export default Reviews;
